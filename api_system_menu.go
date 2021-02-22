@@ -36,6 +36,7 @@ func GetSystemMenuJson(db_name string) {
 	fmt.Println(string(request_json))
 }
 
+//初始化系统基础数据 新系统第一次使用前调用
 func InitSystemData(db_name string) int {
 
 	Insert_LoginAccount_Admin(db_name)

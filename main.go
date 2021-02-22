@@ -1,11 +1,12 @@
-package main
+// package main
+package gamedb_open_api
 
-import "gamedb_open_api"
+// import "gamedb_open_api"
 
-func main() {
+// func main() {
 
-	gamedb_open_api.InitGinRoute()
-}
+// 	gamedb_open_api.InitGinRoute()
+// }
 
 /*
 windows:
