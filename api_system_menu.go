@@ -1,4 +1,4 @@
-package api
+package gamedb_open_api
 
 //初始化系统基础数据 新系统第一次使用前调用
 func InitSystemData(db_name string) int {
