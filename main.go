@@ -1,12 +1,18 @@
-// package main
-package gamedb_open_api
+package main
 
-// import "gamedb_open_api"
+import (
+	"fmt"
+	"gamedb_open_api/src/api"
+)
 
-// func main() {
+// package gamedb_open_api
 
-// 	gamedb_open_api.InitGinRoute()
-// }
+func main() {
+
+	var a = api.InitSystemData("a")
+	fmt.Println(a)
+	// gamedb_open_api.InitGinRoute()
+}
 
 /*
 windows:
