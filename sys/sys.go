@@ -1,6 +1,6 @@
 package sys
 
-func GetGUID() string {
+// func GetGUID() string {
 
-	return "aacddd123"
-}
+// 	return "aacddd123"
+// }
