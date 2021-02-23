@@ -22,3 +22,8 @@ Latest release:
 "github.com/adjing/gamedb_open_api/sys"
 
 */
+
+/*
+有新代码提交 》 更新发布后，使用项目里面执行go get先更新：
+go get github.com/adjing/gamedb_open_api/role
+*/
