@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"gamedb_open_api/src/api"
+
+	"github.com/adjing/gamedb_open_api"
 )
 
 // package gamedb_open_api
 
 func main() {
 
-	var a = api.InitSystemData("a")
+	var a = gamedb_open_api.InitSystemData("a")
 	fmt.Println(a)
 	// gamedb_open_api.InitGinRoute()
 }
