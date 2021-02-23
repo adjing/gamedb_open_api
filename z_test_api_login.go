@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"gamedb_open_api/sys"
+
 	"github.com/gin-gonic/gin"
 )
 

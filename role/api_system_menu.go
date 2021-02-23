@@ -3,9 +3,23 @@ package role
 import (
 	"encoding/json"
 	"fmt"
+	"gamedb_open_api/sys"
 )
 
-func GetSystemMenuJson(db_name string) {
+//1 初始化系统基础数据 新系统第一次使用前调用
+func InitSystemData(db_name string) int {
+
+	Insert_LoginAccount_Admin(db_name)
+
+	DeleteAll_SystemMenu(db_name)
+	DeleteAll_SystemMenuItem(db_name)
+	//
+	InitMenu(db_name)
+	//
+	return 1
+}
+
+func GetSystemMenuJson(db_name string) SendClientCom {
 
 	lst := GetListAll_SystemMenu(db_name)
 	var menutree []SystemMenuTree
@@ -28,25 +42,14 @@ func GetSystemMenuJson(db_name string) {
 	backcom.Data = menutree
 	backcom.Text = "suc"
 	//
-	fmt.Println("menu json:", GetBeiJingTime())
+	fmt.Println("menu json:", sys.GetBeiJingTime())
 	request_json, err := json.Marshal(backcom)
 	if err != nil {
 
 	}
 	fmt.Println(string(request_json))
-}
 
-//初始化系统基础数据 新系统第一次使用前调用
-func InitSystemData(db_name string) int {
-
-	Insert_LoginAccount_Admin(db_name)
-
-	DeleteAll_SystemMenu(db_name)
-	DeleteAll_SystemMenuItem(db_name)
-	//
-	InitMenu(db_name)
-	//
-	return 1
+	return backcom
 }
 
 func GetParentMenuNodeList() []SystemMenu {

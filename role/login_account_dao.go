@@ -3,6 +3,7 @@ package role
 //2020-12-15
 import (
 	"context"
+	"gamedb_open_api/sys"
 
 	// "github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/bson"
@@ -19,11 +20,11 @@ func Insert_LoginAccount_Admin(db_name string) {
 	//
 	var row LoginAccount
 
-	row.UserGUID = GetGUID()
+	row.UserGUID = sys.GetGUID()
 	row.UserName = UserName
 	row.LoginPassword = "123456"
-	row.UpdateTime = GetNowTimestamp()
-	row.UpdateTimeText = GetBeiJingTime()
+	row.UpdateTime = sys.GetNowTimestamp()
+	row.UpdateTimeText = sys.GetBeiJingTime()
 	//
 	Insert_LoginAccount(db_name, row)
 }

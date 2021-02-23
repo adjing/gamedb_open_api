@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"gamedb_open_api/role"
 	"net/http"
 
-	"github.com/adjing/gamedb_open_api/sys"
+	"gamedb_open_api/sys"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,10 +22,27 @@ func InitGinRoute() {
 
 	v1.POST("/login", API_Login)
 
+	//role.InitSystemData
+	v1.GET("/initsys", API_InitSystemData) //test
+
+	v1.GET("/getmenu", API_GetSystemMenuJson) //test
+
 	var port = 9095
 	fmt.Println("run 9095 time:", sys.GetBeiJingTime())
 	route.Run(fmt.Sprintf(":%d", port))
 
+}
+
+func API_GetSystemMenuJson(c *gin.Context) {
+	var b = role.GetSystemMenuJson(m_db_name)
+
+	c.JSON(http.StatusOK, b)
+}
+
+func API_InitSystemData(c *gin.Context) {
+	role.InitSystemData(m_db_name)
+
+	c.String(http.StatusOK, "ok")
 }
 
 func HomePage(c *gin.Context) {

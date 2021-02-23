@@ -2,6 +2,7 @@ package role
 
 import (
 	"fmt"
+	"gamedb_open_api/sys"
 	"log"
 	"net/http"
 	"time"
@@ -85,11 +86,11 @@ func Register(db_name string, c *gin.Context) {
 	fmt.Println(r)
 
 	var row LoginAccount
-	row.UserGUID = GetGUID()
+	row.UserGUID = sys.GetGUID()
 	row.UserName = r.UserName
 	row.LoginPassword = r.Passwd
 	row.UpdateTime = time.Now().Unix()
-	row.UpdateTimeText = GetBeiJingTime()
+	row.UpdateTimeText = sys.GetBeiJingTime()
 
 	err = Insert_LoginAccount(db_name, row)
 	if err != nil {
