@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
-	"gamedb_open_api/role"
+	// "gamedb_open_api/role"
+	// "gamedb_open_api/sys"
+
 	"net/http"
 
-	"gamedb_open_api/sys"
-
+	"github.com/adjing/gamedb_open_api/role"
+	"github.com/adjing/gamedb_open_api/sys"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,7 +22,7 @@ func InitGinRoute() {
 	route.GET("/", HomePage)
 	v1 := route.Group("v1")
 
-	v1.POST("/login", API_Login)
+	// v1.POST("/login", API_Login)
 
 	//role.InitSystemData
 	v1.GET("/initsys", API_InitSystemData) //test

@@ -2,8 +2,12 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/adjing/gamedb_open_api v1.1.6 h1:9JvYZsZ3HTBq8F35Sn+DlmB6gN5WdNd4lO35GksKCpg=
 github.com/adjing/gamedb_open_api/role v0.0.0-20210223033308-55adad0ae7dc h1:M7zrasg69kp0FFXnDPYkMVpm/aC7O5C4txY2MZDPKMs=
 github.com/adjing/gamedb_open_api/role v0.0.0-20210223033308-55adad0ae7dc/go.mod h1:WL0xb1lvR4H+oJ2GJwv6MTNZKgfT9DhSkTrMzLv0XKw=
+github.com/adjing/gamedb_open_api/role v0.0.0-20210223043240-a525b92a7e44 h1:rV3HEhp2muMGSqY4T7SfM1W639HKxKdvRMIqSgREfCw=
+github.com/adjing/gamedb_open_api/role v0.0.0-20210223043240-a525b92a7e44/go.mod h1:WL0xb1lvR4H+oJ2GJwv6MTNZKgfT9DhSkTrMzLv0XKw=
 github.com/adjing/gamedb_open_api/sys v0.0.0-20210223033308-55adad0ae7dc h1:QZa2zJsS2oJvu210Cy+LKJrwSBvWWvl+cPOvjk8eIpQ=
 github.com/adjing/gamedb_open_api/sys v0.0.0-20210223033308-55adad0ae7dc/go.mod h1:4xvvPYMM2wlpfpFQU4Csehn2QQyaDLqdg/Rseaktx7E=
+github.com/adjing/gamedb_open_api/sys v0.0.0-20210223044147-d03ea63049a5 h1:in8+c3PFA0FCXcy+GVUnCJ5VFROcXUCJXP9zY01ffOQ=
+github.com/adjing/gamedb_open_api/sys v0.0.0-20210223044147-d03ea63049a5/go.mod h1:4xvvPYMM2wlpfpFQU4Csehn2QQyaDLqdg/Rseaktx7E=
 github.com/aws/aws-sdk-go v1.34.28 h1:sscPpn/Ns3i0F4HPEWAVcwdIRaZZCuL7llJ2/60yPIk=
 github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

@@ -3,7 +3,9 @@ package role
 import (
 	"encoding/json"
 	"fmt"
-	"gamedb_open_api/sys"
+
+	// "gamedb_open_api/sys"
+	"github.com/adjing/gamedb_open_api/sys"
 )
 
 //1 初始化系统基础数据 新系统第一次使用前调用
