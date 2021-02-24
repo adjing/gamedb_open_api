@@ -8,6 +8,12 @@ func main() {
 }
 
 /*
+> go env -w GOOS=windows
+> go env GOOS
+
+*/
+
+/*
 dev debug:
 
 "gamedb_open_api/role"

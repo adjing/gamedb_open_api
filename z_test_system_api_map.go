@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	// "gamedb_open_api/role"
-	// "gamedb_open_api/sys"
+	"gamedb_open_api/role"
+	"gamedb_open_api/sys"
 
 	"net/http"
 
-	"github.com/adjing/gamedb_open_api/role"
-	"github.com/adjing/gamedb_open_api/sys"
+	// "github.com/adjing/gamedb_open_api/role"
+	// "github.com/adjing/gamedb_open_api/sys"
 	"github.com/gin-gonic/gin"
 )
 
