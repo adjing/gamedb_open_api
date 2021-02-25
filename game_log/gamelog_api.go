@@ -14,7 +14,7 @@ import (
 //gamelog_api.go
 var db_name_gamelog = "game_dev_log"
 
-//v1.POST("/getlist_gamelog", database_mongodb_business.APIGetList_GameLog)
+//v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
 func APIGetList_GameLog(c *gin.Context) {
 	//收到参数
 
@@ -29,7 +29,7 @@ func APIGetList_GameLog(c *gin.Context) {
 	c.JSON(http.StatusOK, backcom)
 }
 
-//v1.POST("/insertone_gamelog", database_mongodb_business.APIInsertOne_GameLog)
+//v1.POST("/insertone_gamelog", game_log.APIInsertOne_GameLog)
 func APIInsertOne_GameLog(c *gin.Context) {
 	//1 Server and client communication components
 	rcom := GameLogCom{}
@@ -45,7 +45,7 @@ func APIInsertOne_GameLog(c *gin.Context) {
 
 	//4 set value
 	rcom.Auto_guid = sys.GetGUID()
-	// rcom.UpdateTime = sys.GetBeiJingTime()
+	rcom.Log_time = sys.GetBeiJingTime()
 
 	//insert
 	err = Insert_GameLog(db_name_gamelog, rcom)
@@ -54,11 +54,12 @@ func APIInsertOne_GameLog(c *gin.Context) {
 	}
 	backcom := GetSendClientComDefault()
 	backcom.Text = "suc"
+	backcom.Data = fmt.Sprintf("suc %s", sys.GetBeiJingTime())
 	c.JSON(http.StatusOK, backcom)
 }
 
-//v1.POST("/deletestatus_gamelog", database_mongodb_business.APIDeleteStatus_GameLog)
-func APIDeleteStatus_GameLog(c *gin.Context) {
+//v1.POST("/deletestatus_gamelog", game_log.APIDeleteStatus_GameLog)
+func APIDeleteAll_GameLog(c *gin.Context) {
 	//1 Server and client communication components
 	count, err := DeleteAll_GameLog(db_name_gamelog)
 	if err != nil {

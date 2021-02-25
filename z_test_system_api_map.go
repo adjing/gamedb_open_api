@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gamedb_open_api/game_log"
 	"gamedb_open_api/role"
 	"gamedb_open_api/sys"
 
@@ -25,9 +26,11 @@ func InitGinRoute() {
 	// v1.POST("/login", API_Login)
 
 	//role.InitSystemData
-	v1.GET("/initsys", API_InitSystemData) //test
-
+	v1.GET("/initsys", API_InitSystemData)    //test
 	v1.GET("/getmenu", API_GetSystemMenuJson) //test
+	v1.POST("/insertone_gamelog", game_log.APIInsertOne_GameLog)
+	v1.POST("/deleteall_gamelog", game_log.APIDeleteAll_GameLog)
+	v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
 
 	var port = 9095
 	fmt.Println("run 9095 time:", sys.GetBeiJingTime())
