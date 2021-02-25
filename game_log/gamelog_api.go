@@ -46,7 +46,9 @@ func APIInsertOne_GameLog(c *gin.Context) {
 	//4 set value
 	rcom.Auto_guid = sys.GetGUID()
 	rcom.Log_time = sys.GetBeiJingTime()
-
+	//
+	var log = fmt.Sprintf("%s %s", rcom.Log_time, rcom.Log_text)
+	fmt.Println(log)
 	//insert
 	err = Insert_GameLog(db_name_gamelog, rcom)
 	if err != nil {
@@ -91,12 +93,6 @@ func GetReceiveComByte(c *gin.Context) []byte {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	fmt.Println("rev_com text =")
-
-	txt := string(rev)
-	fmt.Println(txt)
-	// fmt.Println(rev_com)
 
 	return rev
 }

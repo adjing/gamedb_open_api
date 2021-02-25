@@ -30,6 +30,8 @@ func InitGinRoute() {
 	v1.GET("/getmenu", API_GetSystemMenuJson) //test
 	v1.POST("/insertone_gamelog", game_log.APIInsertOne_GameLog)
 	v1.POST("/deleteall_gamelog", game_log.APIDeleteAll_GameLog)
+	v1.GET("/deleteall_gamelog", game_log.APIDeleteAll_GameLog)
+
 	v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
 
 	var port = 9095
