@@ -49,11 +49,24 @@ func APIInsertOne_GameLog(c *gin.Context) {
 	//
 	var log = fmt.Sprintf("%s %s", rcom.Log_time, rcom.Log_text)
 	fmt.Println(log)
-	//insert
-	err = Insert_GameLog(db_name_gamelog, rcom)
-	if err != nil {
-		fmt.Println(err)
+
+	if rcom.Event_ID == 2 {
+		//update api
+		dbrow := GetInfo_GameLog_API_Name(db_name_gamelog, rcom.API_Name)
+		//
+		dbrow.Response_JSON = rcom.Response_JSON
+		dbrow.Log_time = sys.GetBeiJingTime()
+
+		Update_APILog(db_name_gamelog, dbrow)
+
+	} else {
+		//insert
+		err = Insert_GameLog(db_name_gamelog, rcom)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
+
 	backcom := GetSendClientComDefault()
 	backcom.Text = "suc"
 	backcom.Data = fmt.Sprintf("suc %s", sys.GetBeiJingTime())

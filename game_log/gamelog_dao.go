@@ -48,19 +48,26 @@ func GetListBase_GameLog(db_name string, filter bson.M) (pro []GameLogCom, err e
 // 	return lst
 // }
 
-// //5. 查询一条记录(一个document)
-// func GetInfo_GameLog(auto_guid string) GameLogCom {
-// 	lst, err := GetListBase_GameLog(bson.M{"auto_guid": auto_guid})
-// 	var count = len(lst)
-// 	if err != nil {
-// 		//
-// 	}
-// 	var row GameLogCom
-// 	if count > 0 {
-// 		row = lst[0]
-// 	}
-// 	return row
-// }
+//5. 查询一条记录(一个document)
+func GetInfo_GameLog_API_Name(db_name string, api_name string) GameLogCom {
+	lst, err := GetListBase_GameLog(db_name, bson.M{"api_name": api_name})
+	var count = len(lst)
+	if err != nil {
+		//
+	}
+	var row GameLogCom
+	if count > 0 {
+		row = lst[0]
+	}
+	return row
+}
+
+//6. 更新
+func Update_APILog(db_name string, doc GameLogCom) error {
+	var dt = Get_Collection(db_name, MongoDBCollection_GameLog)
+	_, err := dt.UpdateOne(context.Background(), bson.M{"api_name": doc.API_Name}, bson.M{"$set": doc})
+	return err
+}
 
 //7. Delete
 func Delete_GameLog(db_name string, filter bson.M) (count int64, err error) {
