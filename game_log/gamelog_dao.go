@@ -124,5 +124,63 @@ func GetListPaging_GameLog(db_name string, p_pageindex int64, p_pagesize int64) 
 	return
 }
 
+//9.  分页查询 Search
+func GetListPaging_GameLog_Search(db_name string, p_pageindex int64, p_pagesize int64, api_name string) (lst []GameLogCom, err error) {
+
+	var dt = Get_Collection(db_name, MongoDBCollection_GameLog)
+
+	if p_pagesize <= 0 {
+		p_pagesize = 10
+	}
+
+	if p_pageindex <= 0 {
+		p_pageindex = 1
+	}
+
+	opts := new(options.FindOptions)
+	limit := p_pagesize
+	skip := (p_pageindex - 1) * p_pagesize
+
+	sortMap := make(map[string]interface{})
+	sortMap["log_time"] = -1
+	opts.Sort = sortMap
+
+	opts.Limit = &limit
+	opts.Skip = &skip
+
+	cur, err := dt.Find(context.Background(), bson.M{"api_name": api_name}, opts)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	for cur.Next(context.Background()) {
+		tmp := GameLogCom{}
+		err := cur.Decode(&tmp)
+		if err != nil {
+			return nil, err
+		}
+		lst = append(lst, tmp)
+	}
+	return
+}
+
+func GetListAll_GameLogCom(db_name string) (lst []GameLogCom, err error) {
+
+	lst1, err1 := GetListBase_GameLog(db_name, bson.M{})
+	var count = len(lst)
+	if err1 != nil {
+		//
+		err = err1
+	}
+
+	if count > 0 {
+		lst = lst1
+	}
+
+	return
+
+}
+
 //	"go.mongodb.org/mongo-driver/bson"
 //	"go.mongodb.org/mongo-driver/mongo/options"

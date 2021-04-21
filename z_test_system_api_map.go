@@ -33,6 +33,8 @@ func InitGinRoute() {
 	v1.GET("/deleteall_gamelog", game_log.APIDeleteAll_GameLog)
 
 	v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
+	v1.POST("/search_by_api_name", game_log.API_search_by_api_name)
+	v1.POST("/getlist_api_name", game_log.API_getlist_api_name)
 
 	var port = 9095
 	fmt.Println("run 9095 time:", sys.GetBeiJingTime())

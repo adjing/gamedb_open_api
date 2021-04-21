@@ -17,8 +17,52 @@ var db_name_gamelog = "game_dev_log"
 //v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
 func APIGetList_GameLog(c *gin.Context) {
 	//收到参数
+	rcom := PagingSelectList{}
+	rbyte := GetReceiveComByte(c)
 
-	lst, err := GetListPaging_GameLog(db_name_gamelog, 1, 100)
+	//2 json to com
+	var err = json.Unmarshal(rbyte, &rcom)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	lst, err := GetListPaging_GameLog(db_name_gamelog, int64(rcom.CurrentPageIndex), 20)
+	if err != nil {
+
+	}
+	backcom := GetSendClientComDefault()
+	backcom.Text = "suc"
+	backcom.Data = lst
+
+	c.JSON(http.StatusOK, backcom)
+}
+
+func API_getlist_api_name(c *gin.Context) {
+	//收到参数
+	lst, err := GetListAll_APINameDB(db_name_gamelog)
+	if err != nil {
+
+	}
+	//
+	backcom := GetSendClientComDefault()
+	backcom.Text = "suc"
+	backcom.Data = lst
+
+	c.JSON(http.StatusOK, backcom)
+}
+
+func API_search_by_api_name(c *gin.Context) {
+	//收到参数
+	rcom := PagingSelectList{}
+	rbyte := GetReceiveComByte(c)
+
+	//2 json to com
+	var err = json.Unmarshal(rbyte, &rcom)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	lst, err := GetListPaging_GameLog_Search(db_name_gamelog, 1, 20, rcom.SearchText)
 	if err != nil {
 
 	}
@@ -65,6 +109,21 @@ func APIInsertOne_GameLog(c *gin.Context) {
 		if err != nil {
 			fmt.Println(err)
 		}
+
+		//save API
+		if rcom.API_Name != "" {
+			apiinfo := GetInfo_APINameDB(db_name_gamelog, rcom.API_Name)
+			if apiinfo.Api_guid == "" {
+				apirow := APINameDBCom{}
+				apirow.Api_guid = sys.GetGUID()
+				apirow.Api_name = rcom.API_Name
+				apirow.Api_desc = apirow.Api_name
+				apirow.ClickCount = 1
+				//
+				Insert_APINameDB(db_name_gamelog, apirow)
+			}
+		}
+
 	}
 
 	backcom := GetSendClientComDefault()
@@ -80,14 +139,26 @@ func APIDeleteAll_GameLog(c *gin.Context) {
 	if err != nil {
 
 	}
-	var msg = fmt.Sprintf("del count: %d", count)
-	c.String(http.StatusOK, msg)
+	// var msg = fmt.Sprintf("del count: %d", count)
+	// c.String(http.StatusOK, msg)
+	//
+	backcom := GetSendClientComDefault()
+	backcom.Text = fmt.Sprintf("suc %d", count)
+	backcom.Data = nil
+
+	c.JSON(http.StatusOK, backcom)
 }
 
 type SendClientCom struct {
 	Code int         `json:"status_code"` //1 操作状态ID
 	Text string      `json:"status_text"` //2 操作状态描述
 	Data interface{} `json:"data"`        //3 返回数据
+}
+
+type PagingSelectList struct {
+	CurrentPageIndex int    `json:"current_page_index"` //1 当前页索引
+	PageSize         int    `json:"page_size"`          //2 页大小 默认20条数据
+	SearchText       string `json:"search_text"`        //3 搜索文本
 }
 
 func GetSendClientComDefault() SendClientCom {
