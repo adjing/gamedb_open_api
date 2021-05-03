@@ -8,7 +8,9 @@ import (
 
 	"gamedb_open_api/sys"
 
+	// "github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 //gamelog_api.go
@@ -26,7 +28,29 @@ func APIGetList_GameLog(c *gin.Context) {
 		fmt.Println(err)
 	}
 
-	lst, err := GetListPaging_GameLog(db_name_gamelog, int64(rcom.CurrentPageIndex), 20)
+	lst, err := GetListPaging_GameLog(db_name_gamelog, int64(rcom.CurrentPageIndex), 20, bson.M{})
+	if err != nil {
+
+	}
+	backcom := GetSendClientComDefault()
+	backcom.Text = "suc"
+	backcom.Data = lst
+
+	c.JSON(http.StatusOK, backcom)
+}
+
+func APIGetList_GameLog_Error(c *gin.Context) {
+	//收到参数
+	rcom := PagingSelectList{}
+	rbyte := GetReceiveComByte(c)
+
+	//2 json to com
+	var err = json.Unmarshal(rbyte, &rcom)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	lst, err := GetListPaging_GameLog(db_name_gamelog, int64(rcom.CurrentPageIndex), 50, bson.M{"log_type": 2})
 	if err != nil {
 
 	}

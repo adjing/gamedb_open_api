@@ -33,6 +33,8 @@ func InitGinRoute() {
 	v1.GET("/deleteall_gamelog", game_log.APIDeleteAll_GameLog)
 
 	v1.POST("/getlist_gamelog", game_log.APIGetList_GameLog)
+	v1.POST("/getlist_gamelog_error", game_log.APIGetList_GameLog_Error)
+
 	v1.POST("/search_by_api_name", game_log.API_search_by_api_name)
 	v1.POST("/getlist_api_name", game_log.API_getlist_api_name)
 

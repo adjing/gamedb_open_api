@@ -83,8 +83,8 @@ func DeleteAll_GameLog(db_name string) (count int64, err error) {
 	return c, e
 }
 
-//9.  分页查询
-func GetListPaging_GameLog(db_name string, p_pageindex int64, p_pagesize int64) (lst []GameLogCom, err error) {
+//9.  分页查询 bson.M{}
+func GetListPaging_GameLog(db_name string, p_pageindex int64, p_pagesize int64, filter bson.M) (lst []GameLogCom, err error) {
 
 	var dt = Get_Collection(db_name, MongoDBCollection_GameLog)
 
@@ -107,7 +107,7 @@ func GetListPaging_GameLog(db_name string, p_pageindex int64, p_pagesize int64) 
 	opts.Limit = &limit
 	opts.Skip = &skip
 
-	cur, err := dt.Find(context.Background(), bson.M{}, opts)
+	cur, err := dt.Find(context.Background(), filter, opts)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
